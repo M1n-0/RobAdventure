@@ -640,7 +640,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 1827226128182048838, guid: bcde67cd12d2f254b978bb717af7db4e, type: 3}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 1827226128182048838, guid: bcde67cd12d2f254b978bb717af7db4e, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
