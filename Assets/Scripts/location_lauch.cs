@@ -18,4 +18,11 @@ public class location_lauch : MonoBehaviour
 
     }
     }
+
+    void OnTriggerExit(Collider triggerObject){
+        if (Input.GetKeyDown(KeyCode.E)){
+            m_Rigidbody.constraints = RigidbodyConstraints.None;
+        }
+            
+    }
 }
