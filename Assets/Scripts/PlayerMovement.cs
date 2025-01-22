@@ -80,14 +80,14 @@ public class PlayerMovement : MonoBehaviour
             if (hit.collider.CompareTag(groundTag))
             {
                 isGrounded = true;
-                Debug.Log("Is Grounded By Ray V 〰️");
+                // Debug.Log("Is Grounded By Ray V 〰️");
                 Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.green);
             }
         }
         else
         {
             isGrounded = false;
-            Debug.Log("Not Grounded By Ray X 〰️");
+            // Debug.Log("Not Grounded By Ray X 〰️");
             Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.red);
         }
     }

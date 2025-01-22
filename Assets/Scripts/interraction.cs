@@ -9,11 +9,13 @@ public class interraction : MonoBehaviour
     public GameObject InteractionPanelUI;
     private bool isIn = false;
     private void OnTriggerEnter(Collider other){
+        Debug.Log("Entered trigger");
         if (other.CompareTag("Player")){
             isIn = true;
         }
     }
     private void OnTriggerExit(Collider other){
+        Debug.Log("Exited Trigger"); 
         if (other.CompareTag("Player")){
             if (isInInteraction){
                 leave();
@@ -23,7 +25,8 @@ public class interraction : MonoBehaviour
     }
     void Update(){
         if (isIn){
-            if (Input.GetKeyDown(KeyCode.Space)){
+            if (Input.GetKeyDown(KeyCode.E)){
+                Debug.Log("Key E pressed while in triggerbox");
                 if (isInInteraction){
                     leave();
                 }
@@ -37,10 +40,12 @@ public class interraction : MonoBehaviour
   
     void interact(){
         InteractionPanelUI.SetActive(true);
+        Debug.Log("activated Pannel");
         isInInteraction = true;
     }
     void leave(){
         InteractionPanelUI.SetActive(false);
+        Debug.Log("Desactivated Pannel");
         isInInteraction = false;
     }
 }
