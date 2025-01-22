@@ -1,64 +1,95 @@
+//made by NepNath 
+//Creation Date: 27/11/2024
+//last edited: 18/12/2024
+
+// This script is made for a student project called "RobAdventure".
+// These inputs are designed for a specific set of controller handmade,
+// based on a arcade machine (arcade joystick and 4 buttons)
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float movementSpeed;
-    public float jumpSpeed;
-    private float ySpeed;
-    private float horizontalInput;
-    private float verticalInput;
-    private CharacterController conn;
-    public bool isGrounded;
 
-    Vector3 moveDirection;
-    Vector3 vel;
+    [Header("Player Movement details")]
+    public float speed = 10f;
+    public float JumpForce = 10;
+    public Rigidbody Rigidbody;
+    public float TurnSpeed;
 
-    private void Start()
+    private bool isGrounded;
+    [Header("Raycast propeties")]
+
+    Ray ray;
+    public float MaxRayDist = 100;
+    public string groundTag = "JumpTrigger";
+    
+    // Start is called before the first frame update
+    void Start()
     {
-        conn = GetComponent<CharacterController>();
+        
+        
+        
     }
 
-    private void Update()
-    {
-        myInput();
-        movePlayer();
-    }
+    // Update is called once per frame
+    void Update()
+    {   
+        //raycast declaration   
+        ray = new Ray(transform.position, Vector3.down);
+        Vector3 rayOrigin = transform.position;
+        Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.blue);
 
-    private void myInput()
-    {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-    }
 
-    private void movePlayer()
-    {
-        moveDirection = new Vector3(horizontalInput, 0, verticalInput);
-        moveDirection.Normalize();
-        //transform.Translate(moveDirection * movementSpeed);
-        conn.SimpleMove(moveDirection * movementSpeed);
-        ySpeed += Physics.gravity.y * Time.deltaTime;
-        if(Input.GetButtonDown("Jump"))
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        
+
+        Vector3 moveDirection = new Vector3(horizontalInput, 0, 0).normalized;
+
+        if (moveDirection != Vector3.zero)
         {
-            ySpeed = -0.5f;
-            isGrounded = false;
+            transform.position += moveDirection * speed * Time.deltaTime;
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
         }
-        vel = moveDirection;
-        vel.y = ySpeed;
-        //transform.Translate(vel);
-        conn.SimpleMove(vel);
-        if(conn.isGrounded)
+
+        //jump for button
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && isGrounded == true) // equivalent of 'X'/'A'
         {
-            ySpeed = -0.5f;
-            isGrounded = true;
-            if(Input.GetButtonDown("Jump"))
+           Rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+           Debug.Log("Jump key  pressed");
+        }
+        //jump for keyboard
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true) // equivalent of 'X'/'A'
+        {
+           Rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+           Debug.Log("Jump key  pressed");
+        }
+
+        //raycast
+        if(Physics.Raycast(ray, out RaycastHit hit, MaxRayDist))
+        {
+            if (hit.collider.CompareTag(groundTag))
             {
-                ySpeed = jumpSpeed;
-                isGrounded = false;
+                isGrounded = true;
+                Debug.Log("Is Grounded By Ray V 〰️");
+                Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.green);
             }
-
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.Log("Not Grounded By Ray X 〰️");
+            Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.red);
         }
     }
+
 }
