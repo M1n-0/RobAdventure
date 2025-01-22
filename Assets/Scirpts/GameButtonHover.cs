@@ -1,23 +1,36 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
-public class GameButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class GameButtonSelected : MonoBehaviour
 {
-    public TMP_Text gameNameText;
-    public string gameName;
+    public TMP_Text gameNameText; // The text element to display the game name
+    public string gameName;       // The name of the game for this button
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private Button button;
+
+    private void Start()
     {
-        if (gameNameText != null)
+        button = GetComponent<Button>();
+    }
+
+    private void Update()
+    {
+        // Check if this button is currently selected
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
         {
-            gameNameText.text = gameName;
+            if (gameNameText != null)
+            {
+                gameNameText.text = gameName; // Update the text to the game name
+            }
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    private void OnDisable()
     {
-        if (gameNameText != null)
+        // Reset text when the button is disabled or deselected
+        if (gameNameText != null && EventSystem.current.currentSelectedGameObject == gameObject)
         {
             gameNameText.text = "";
         }
