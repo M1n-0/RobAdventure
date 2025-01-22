@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class walk : MonoBehaviour
 {
-    Animator animation;
+    Animator animate;
     
     // Start is called before the first frame update
     void Start()
     {
-        animation = GetComponent<Animator>();
+        animate = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,11 +21,11 @@ public class walk : MonoBehaviour
 
         if (moveDirection != Vector3.zero)
         {
-            animation.SetBool("isWalking",true);
+            animate.SetBool("isWalking",true);
         }
         else
         {
-            animation.SetBool("isWalking",false);
+            animate.SetBool("isWalking",false);
         }
     }
 
