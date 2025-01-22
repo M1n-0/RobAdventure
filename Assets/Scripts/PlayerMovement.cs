@@ -17,7 +17,6 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [Header("Player Movement details")]
     public float speed = 10f;
     public float JumpForce = 10;
@@ -56,9 +55,12 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             transform.position += moveDirection * speed * Time.deltaTime;
-
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+        }
+        else
+        {
+        
         }
 
         //jump for button
