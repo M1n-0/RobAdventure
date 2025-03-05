@@ -1539,7 +1539,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1983308229}
         m_TargetAssemblyTypeName: Management, Assembly-CSharp
-        m_MethodName: goToMap
+        m_MethodName: Ending
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
