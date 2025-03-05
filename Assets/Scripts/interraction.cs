@@ -8,6 +8,12 @@ public class interraction : MonoBehaviour
     public static bool isInInteraction = false;
     public GameObject InteractionPanelUI;
     private bool isIn = false;
+
+        void Start(){
+    isInInteraction = false;
+    isIn = false;
+    }
+
     private void OnTriggerEnter(Collider other){
         Debug.Log("Entered trigger");
         if (other.CompareTag("Player")){
@@ -23,6 +29,7 @@ public class interraction : MonoBehaviour
             isIn = false;
         }
     }
+
     void Update(){
         if (isIn){
             if (Input.GetKeyDown(KeyCode.E)){

@@ -14,6 +14,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static interraction;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,12 +32,10 @@ public class PlayerMovement : MonoBehaviour
     public string groundTag = "JumpTrigger";
     
     // Start is called before the first frame update
-    void Start()
-    {
-        
-        
+    void Start(){
         
     }
+        
 
     // Update is called once per frame
     void Update()
@@ -46,21 +45,18 @@ public class PlayerMovement : MonoBehaviour
         Vector3 rayOrigin = transform.position;
         Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.blue);
 
-
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        
 
         Vector3 moveDirection = new Vector3(horizontalInput, 0, 0).normalized;
 
-        if (moveDirection != Vector3.zero)
+        if (!isInInteraction)
         {
-            transform.position += moveDirection * speed * Time.deltaTime;
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
-        }
-        else
-        {
-        
+            if (moveDirection != Vector3.zero)
+            {
+                transform.position += moveDirection * speed * Time.deltaTime;
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            }
         }
 
         //jump for button
