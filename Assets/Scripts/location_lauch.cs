@@ -32,7 +32,8 @@ public class location_lauch : MonoBehaviour
     }
     void Update(){
         if (isinzone == true) {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && onlevier == false) {
+            Debug.Log(isinzone);
+            if (Input.GetKeyDown(KeyCode.LeftControl) && onlevier == false && lockpos == true) {
                 m_Rigidbody.constraints = RigidbodyConstraints.None;
                 if (previousShadow != null){
                     Destroy(previousShadow);
@@ -105,22 +106,28 @@ public class location_lauch : MonoBehaviour
         }
         switch(ventilo){
             case 1:
-                previousShadow = Instantiate(shadow, new Vector3(0f,2.5f,10.1f), Quaternion.identity);
+                previousShadow = Instantiate(shadow, new Vector3(-1.386f,2.463f,1.7f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
             case 2:
-                previousShadow = Instantiate(shadow, new Vector3(1.5f,2.5f,10.1f), Quaternion.identity);
+                previousShadow = Instantiate(shadow, new Vector3(-1.11f,2.463f,1.7f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
             case 3:
-                previousShadow = Instantiate(shadow, new Vector3(3f,2.5f,10.1f), Quaternion.identity);
+                previousShadow = Instantiate(shadow, new Vector3(-1.386f,1.378f,1.7f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
             case 4:
-                previousShadow = Instantiate(shadow, new Vector3(0f,1f,10.1f), Quaternion.identity);
+                previousShadow = Instantiate(shadow, new Vector3(-1.11f,1.378f,1.7f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
             case 5:
                 previousShadow = Instantiate(shadow, new Vector3(1.5f,1f,10.1f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
             case 6:
                 previousShadow = Instantiate(shadow, new Vector3(3f,1f,10.1f), Quaternion.identity);
+                previousShadow.transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
                 break;
         }
     }
