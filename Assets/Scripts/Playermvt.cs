@@ -93,4 +93,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {   
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            // Apply bounce effect
+            GetComponent<Rigidbody>().linearVelocity = new Vector3(0, 10f, 0); // Adjust force as needed
+        }
+    }
+
 }
