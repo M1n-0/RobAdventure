@@ -10,7 +10,6 @@ public class KeyTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Player")){
             keyCollected = true;
-            Destroy(gameObject);
         }
     }
 }
