@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WorlObject
   - WorldInteractible
+  - Obstacle
   layers:
   - Default
   - TransparentFX
