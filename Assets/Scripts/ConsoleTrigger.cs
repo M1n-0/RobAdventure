@@ -15,8 +15,8 @@ public class ConsoleTrigger : MonoBehaviour
     public GameObject question3;
     public GameObject question4;
 
-    public static bool isInInteraction = false;
-    private bool isIn = false;
+    public static bool isInInteraction;
+    private bool isIn;
     private int numQuestion;
 
     void Start()
@@ -26,7 +26,7 @@ public class ConsoleTrigger : MonoBehaviour
         rend.sharedMaterial = materials[0];
         isInInteraction = false;
         isIn = false;
-        numQuestion = Random.Range(0, 4);
+        numQuestion = Random.Range(0, 3);
     }
 
     // Update is called once per frame
@@ -50,20 +50,10 @@ public class ConsoleTrigger : MonoBehaviour
         Debug.Log("Exited Trigger"); 
         if (other.CompareTag("Player")){
             if (isInInteraction){
-                leave();
+                isInInteraction = false;
             }
             isIn = false;
         }
-    }
-  
-    void interact(){
-        Debug.Log("activated Pannel");
-        isInInteraction = true;
-    }
-
-    void leave(){
-        Debug.Log("Desactivated Pannel");
-        isInInteraction = false;
     }
 
     private void detectInterraction(){
@@ -71,11 +61,10 @@ public class ConsoleTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)){
                 Debug.Log("Key E pressed while in triggerbox");
                 if (isInInteraction){
-                    leave();
+                    isInInteraction = false;
                 }
                 else{
-                    interact();
-                    Destroy(cage);
+                    isInInteraction = true;
                 }
             }
         }
@@ -93,9 +82,6 @@ public class ConsoleTrigger : MonoBehaviour
             if (numQuestion == 2){
                 question3.SetActive(true);
             }
-            if (numQuestion == 3){
-                question4.SetActive(true);
-            }
         }
         else{
             panelEnigme.SetActive(false);
@@ -104,5 +90,16 @@ public class ConsoleTrigger : MonoBehaviour
             question3.SetActive(false);
             question4.SetActive(false);
         }
+    }
+    public void goodAnswer(){
+        Destroy(cage);
+        isInInteraction = false;
+    }
+    public void wrongAnswer(){
+        int previousQuestion = numQuestion;
+        while(previousQuestion == numQuestion){
+            numQuestion = Random.Range(0, 3);
+        }
+        isInInteraction = false;
     }
 }
