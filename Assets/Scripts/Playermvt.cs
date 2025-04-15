@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float JumpForce = 10;
     public Rigidbody Rigidbody;
     public float TurnSpeed;
+    public bool hasLeaf;
 
     private bool isGrounded;
     [Header("Raycast propeties")]
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {   
         //raycast declaration   
         ray = new Ray(transform.position, Vector3.down);
@@ -98,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             // Apply bounce effect
-            GetComponent<Rigidbody>().linearVelocity = new Vector3(0, 10f, 0); // Adjust force as needed
+            GetComponent<Rigidbody>().linearVelocity = new Vector3(0,1.5f, 0); // Adjust force as needed
         }
     }
 

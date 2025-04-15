@@ -12,7 +12,8 @@ public class antigrav : MonoBehaviour
     public GameObject zone;
     public int battery = 0;
     public TMP_Text text;
-    public float ztrans = -0.7f; // Default value
+    public float ztrans = -5f; // Default value
+    public bool hasLeaf;
 
     private void OnTriggerEnter(Collider other)
     {
