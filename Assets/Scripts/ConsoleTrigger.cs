@@ -13,7 +13,6 @@ public class ConsoleTrigger : MonoBehaviour
     public GameObject question1;
     public GameObject question2;
     public GameObject question3;
-    public GameObject question4;
 
     public static bool isInInteraction;
     private bool isIn;
@@ -88,7 +87,6 @@ public class ConsoleTrigger : MonoBehaviour
             question1.SetActive(false);
             question2.SetActive(false);
             question3.SetActive(false);
-            question4.SetActive(false);
         }
     }
     public void goodAnswer(){

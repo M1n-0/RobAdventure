@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
                 GameObject obs = Instantiate(obstacle);
                 obs.transform.position = new Vector3(12, 0, -2);
             }
-            yield return new WaitForSeconds(Random.Range(1, 3.5f));
+            yield return new WaitForSeconds(Random.Range(0.75f, 1.75f));
         }
         
     }
