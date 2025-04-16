@@ -7,9 +7,11 @@ public class Flying : MonoBehaviour
     public Rigidbody Rigidbody;
 
     public GameObject GameOverMenu;
+    Animator animate;
 
     void Start(){
         Time.timeScale = 1;
+        animate = GetComponent<Animator>();
     }
     void Update()
     {
@@ -17,6 +19,14 @@ public class Flying : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0).normalized;
         transform.position += moveDirection * speed * Time.deltaTime;
+        if (moveDirection != Vector3.zero)
+        {
+            animate.SetBool("isJumping",true);
+        }
+        else
+        {
+            animate.SetBool("isJumping",false);
+        }
     }
 
     void OnTriggerEnter(Collider other){
