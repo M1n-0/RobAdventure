@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonTrigger : MonoBehaviour
 {
-    [Header("To Destroy")]
+    [Header("Doors to Open")]
     public GameObject leftDoor;
     public GameObject rightDoor;
 
@@ -19,6 +19,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         isInInteraction = false;
         isIn = false;
+        isOpen = false;
     }
 
     // Update is called once per frame

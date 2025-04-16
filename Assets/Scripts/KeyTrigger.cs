@@ -7,6 +7,10 @@ public class KeyTrigger : MonoBehaviour
 {
     public static bool keyCollected = false;
 
+    void Start(){
+        keyCollected = false;
+    }
+
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Player")){
             keyCollected = true;

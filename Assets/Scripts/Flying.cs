@@ -8,7 +8,9 @@ public class Flying : MonoBehaviour
 
     public GameObject GameOverMenu;
 
-    // Update is called once per frame
+    void Start(){
+        Time.timeScale = 1;
+    }
     void Update()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
