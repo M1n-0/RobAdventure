@@ -4,7 +4,15 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Zone
+  - batterie
+  - platform
+  - exit
   - Platform
+  - Ground
+  - JumpTrigger
+  - MachineCamera
+  - MachineButton
   layers:
   - Default
   - TransparentFX

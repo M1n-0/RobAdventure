@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7176363727583628848}
   - component: {fileID: 8976152185806831945}
-  - component: {fileID: 3103568120334430943}
+  - component: {fileID: 1702230223859508489}
   m_Layer: 0
   m_Name: empty
   m_TagString: Untagged
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3103568120334430943
+--- !u!114 &1702230223859508489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,8 @@ Transform:
   m_GameObject: {fileID: 7817579952903377913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.94, y: 1.05, z: 2.45}
-  m_LocalScale: {x: 3.8096793, y: 0.16262, z: 1.9661648}
+  m_LocalPosition: {x: -6.53, y: 1.25, z: 2.45}
+  m_LocalScale: {x: 2.163555, y: 0.16262, z: 1.9661648}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7176363727583628848}
@@ -132,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a3d964ea61cca74aad9cd47ed31878d, type: 2}
+  - {fileID: 2100000, guid: 98a1d8ef4aee06b45a2336d85e8cfcd0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
