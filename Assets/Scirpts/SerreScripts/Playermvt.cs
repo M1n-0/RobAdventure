@@ -20,6 +20,7 @@ using static interraction;
 public class PlayerMovementSerre : MonoBehaviour
 {
     [Header("Player Movement details")]
+    Vector3 moveDirection;
     public float speed = 10f;
     public float JumpForce = 10;
     public Rigidbody Rigidbody;
@@ -55,22 +56,33 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Debug.Log("Is Grounded");
         }
+
+        if(!isGrounded() || hasLeaf)
+        {
+            Rigidbody.linearDamping = 2;
+        }
+        else
+        {
+            Rigidbody.linearDamping = 5f;
+        }
         
         addedGravity();
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
         
-        Vector3 moveDirection = new Vector3(-horizontalInput, 0, 0).normalized;
+        moveDirection = new Vector3(-horizontalInput, 0, -verticalInput).normalized;
 
         if (!lockpos) {
             if (moveDirection != Vector3.zero)
             {
-                transform.position += moveDirection * speed * Time.deltaTime;
+                Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }
         }
     }
+    
 
     void jump()
     {

@@ -2,6 +2,7 @@ using UnityEngine;
 using static batterie;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class antigrav : MonoBehaviour
 {
@@ -55,19 +56,8 @@ public class antigrav : MonoBehaviour
         }
         if (other.CompareTag("exit"))
         {
-            menu.enabled = true; // Show the canvas when exiting the object
-            Debug.Log("Exited exit object, canvas enabled");
+            SceneManager.LoadScene("JetpackScene1");
         }
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) && canvas.enabled == true)
-        {
-            move.hasLeaf = true;
-            rob.GetComponent<ConstantForce>().force = new Vector3(0f, -0.1f, 0f);
-            Destroy(antigravleaf);
-            Destroy(zone);
-            canvas.enabled = !canvas.enabled;
-        }
-    }
 }

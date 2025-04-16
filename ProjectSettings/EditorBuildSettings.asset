@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Serre.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/JetpackScene1.unity
+    guid: 69d0ff40574cdd34ba971f449b49e292
+  - enabled: 1
+    path: Assets/Scenes/JetpackScene2.unity
+    guid: 81e1182ce17e5df4b843a875ada217d3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
