@@ -7,6 +7,7 @@ TagManager:
   - WorlObject
   - WorldInteractible
   - Obstacle
+  - JumpTrigger
   layers:
   - Default
   - TransparentFX

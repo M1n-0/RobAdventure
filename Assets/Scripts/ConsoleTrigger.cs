@@ -100,4 +100,7 @@ public class ConsoleTrigger : MonoBehaviour
         }
         isInInteraction = false;
     }
+    public bool inInteraction(){
+        return isInInteraction;
+    }
 }
