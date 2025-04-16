@@ -438,9 +438,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2074470966}
-        m_TargetAssemblyTypeName: ArcadeMenu, Assembly-CSharp
-        m_MethodName: LaunchGame
+      - m_Target: {fileID: 1766291626}
+        m_TargetAssemblyTypeName: ButtonBehavior, Assembly-CSharp
+        m_MethodName: LaunchRob
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -15,7 +15,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementRob : MonoBehaviour
 {
 
     [Header("Player Movement details")]

@@ -12,7 +12,7 @@ public class JetPackMovement : MonoBehaviour
     [Header("References")]
     public Camera playerCamera;
     public LayerMask Ground;
-    PlayerMovement pm;
+    // PlayerMovement pm;
     public float CharaControlHeightExtend = 0.2f;
 
     [Header("PlayerInput")]
@@ -43,7 +43,7 @@ public class JetPackMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         originalHeight = controller.height;
         previousPosition = transform.position;
-        pm = GetComponent<PlayerMovement>();
+        // pm = GetComponent<PlayerMovement>();
     }
 
     private void Update()

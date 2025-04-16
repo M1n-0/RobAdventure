@@ -14,4 +14,9 @@ public class ButtonBehavior : MonoBehaviour
     public void LaunchLightWeightTestMap(){
         SceneManager.LoadScene("TestSceneLightWeight");
     }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Serre");
+    }
 }

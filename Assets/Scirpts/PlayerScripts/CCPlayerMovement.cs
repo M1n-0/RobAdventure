@@ -17,7 +17,7 @@ public class CCPlayerMovement : MonoBehaviour
     [Header("References")]
     public Camera playerCamera;
     public LayerMask Ground;
-    PlayerMovement pm;
+    // PlayerMovement pm;
 
     [Header("PlayerInput")]
     float horizontalInput;
@@ -68,7 +68,7 @@ public class CCPlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         originalHeight = controller.height;
         previousPosition = transform.position;
-        pm = GetComponent<PlayerMovement>();
+        // pm = GetComponent<PlayerMovement>();
     }
 
     private void Update()
