@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class interraction : MonoBehaviour
+public class interractionlucas : MonoBehaviour
 {
     public static bool isInInteraction = false;
     public GameObject InteractionPanelUI;

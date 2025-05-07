@@ -2119,7 +2119,6 @@ MonoBehaviour:
   JumpForce: 0.7
   Rigidbody: {fileID: 910313265}
   TurnSpeed: 20
-  hasLeaf: 0
   MaxRayDist: 100
   groundTag: Ground
 --- !u!4 &910313268

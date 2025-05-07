@@ -5,8 +5,6 @@ public class CameraManagement : MonoBehaviour
     [SerializeField] Transform CameraPosition;
     [SerializeField] Vector3 NewCameraPosition;
     [SerializeField] float LerpForce;
-    PlayerMovement Player;
-
     
 
     void LateUpdate()

@@ -10,6 +10,8 @@ TagManager:
   - exit
   - Platform
   - Ground
+  - JumpTrigger
+  - Rope
   layers:
   - Default
   - TransparentFX
