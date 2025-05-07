@@ -11,6 +11,7 @@ public class ButtonTrigger : MonoBehaviour
     public static bool isInInteraction = false;
     private bool isIn = false;
     private bool isOpen = false;
+    private bool destroyed = false;
 
     private Coroutine openLeft;
     private Coroutine openRight;
@@ -20,15 +21,17 @@ public class ButtonTrigger : MonoBehaviour
         isInInteraction = false;
         isIn = false;
         isOpen = false;
+        destroyed = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         detect();
-        if (isOpen){
+        if (isOpen && !destroyed){
             Destroy(leftDoor);
             Destroy(rightDoor);
+            destroyed = true;
         }
     }
 

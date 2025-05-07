@@ -92,6 +92,8 @@ public class ConsoleTrigger : MonoBehaviour
     public void goodAnswer(){
         Destroy(cage);
         isInInteraction = false;
+        keyCollected = false;
+        panelInterraction();
     }
     public void wrongAnswer(){
         int previousQuestion = numQuestion;

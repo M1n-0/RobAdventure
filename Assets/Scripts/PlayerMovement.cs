@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public float TurnSpeed;
 
     private bool isGrounded;
+    private bool isAlive = true;
     [Header("Raycast propeties")]
 
     Ray ray;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         Time.timeScale = 1;
+        isAlive = true;
     }
         
 
@@ -97,8 +99,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Obstacle")){
             GameOverMenu.SetActive(true);
             Time.timeScale = 0;
+            isAlive = false;
             Destroy(gameObject);
         }
+    }
+
+    public bool Alive(){
+        return isAlive;
     }
 
 }
