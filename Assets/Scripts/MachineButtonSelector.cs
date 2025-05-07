@@ -3,8 +3,9 @@ using UnityEngine;
 public class MachineButtonSelector : MonoBehaviour
 {
     public Camera machineCamera; // POV camera
-    public Material defaultMaterial;
-    public Material highlightMaterial;
+    public Camera mainCamera; // Main camera
+    public Material defaultMaterial; // Material bouton par défaut
+    public Material highlightMaterial; // Material bouton selectionné
 
     private GameObject currentSelected;
     
@@ -12,85 +13,108 @@ public class MachineButtonSelector : MonoBehaviour
     public GameObject Button2;
     public GameObject Button3;
 
-    private GameObject[] buttons; // Array to hold the buttons
-    private int selectedButtonIndex = 0; // Index to track which button is selected
+    public GameObject[] answerUIs;
+    public GameObject[] responseUIs;
 
-    private walk playerMovementScript; // Reference to the player movement script
+
+    private GameObject[] buttons;
+    private int selectedButtonIndex = 0; // Index du bouton sélectionné
+
+    private walk playerMovementScript;
 
     void Start()
     {
-        // Initialize the buttons array
         buttons = new GameObject[] { Button1, Button2, Button3 };
 
-        // Initially highlight the first button
-        HighlightButton(selectedButtonIndex);
+        // Cache les réponses et les UI de réponse au lancement
+        foreach (var answer in answerUIs)
+        answer.SetActive(false);
 
-        // Get the player movement script (assuming it's attached to the same object as the player)
-        playerMovementScript = FindObjectOfType<Walk>();
+        foreach (var response in responseUIs)
+        response.SetActive(false);
+
+        playerMovementScript = FindObjectOfType<walk>();
+
+        if (mainCamera != null) mainCamera.gameObject.SetActive(true);
+        if (machineCamera != null) machineCamera.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (!interractionlucas.isInInteraction) return; // Only allow when in POV mode
+        if (!interractionlucas.isInInteraction)
+        {
+            foreach (var answer in answerUIs)
+                answer.SetActive(false);
 
-        // Disable player movement when this script is active
+            foreach (var response in responseUIs)
+                response.SetActive(false);
+
+            return;
+        }
+
+        // Switch a la machineCamera lorsque l'interaction commence
+        if (!machineCamera.gameObject.activeInHierarchy)
+        {
+            if (mainCamera != null) mainCamera.gameObject.SetActive(false);
+            if (machineCamera != null) machineCamera.gameObject.SetActive(true);
+        }
+
+        // Est sensé désactiver le mouvement du joueur
         if (playerMovementScript != null)
         {
-            playerMovementScript.enabled = false; // Disable movement
+            playerMovementScript.enabled = false;
         }
 
-        // Navigate with Q (A on AZERTY) and D
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q)) // Left (Q on QWERTY, A on AZERTY)
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            selectedButtonIndex = (selectedButtonIndex - 1 + buttons.Length) % buttons.Length; // Wrap around
+            selectedButtonIndex = (selectedButtonIndex - 1 + buttons.Length) % buttons.Length;
             HighlightButton(selectedButtonIndex);
         }
-        else if (Input.GetKeyDown(KeyCode.D)) // Right
+        else if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.W))
         {
-            selectedButtonIndex = (selectedButtonIndex + 1) % buttons.Length; // Wrap around
+            selectedButtonIndex = (selectedButtonIndex + 1) % buttons.Length;
             HighlightButton(selectedButtonIndex);
         }
 
-        // Confirm selection with Enter
-        if (Input.GetKeyDown(KeyCode.Return)) // Enter
+        // Confirme avec Entrer
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log("Button selected: " + buttons[selectedButtonIndex].name);
             SelectButton(buttons[selectedButtonIndex]);
         }
-
-        // Optionally, you can also check for player movement if needed, e.g., when the interaction ends
-        // Re-enable player movement after selecting a button (or conditionally based on the game state)
     }
 
-    void HighlightButton(int index)
+    void HighlightButton(int index) // Ne montre que le bouton sélectionné
     {
-        // Reset all buttons to default material
         foreach (var button in buttons)
-        {
             button.GetComponent<Renderer>().material = defaultMaterial;
-        }
 
-        // Highlight the selected button
+        for (int i = 0; i < answerUIs.Length; i++)
+            answerUIs[i].SetActive(i == index);
+
         buttons[index].GetComponent<Renderer>().material = highlightMaterial;
     }
 
     void SelectButton(GameObject button)
     {
         if (currentSelected != null)
-        {
-            // Reset previous material
             currentSelected.GetComponent<Renderer>().material = defaultMaterial;
-        }
 
         currentSelected = button;
         currentSelected.GetComponent<Renderer>().material = highlightMaterial;
 
-        // Additional actions when a button is selected can go here
+        foreach (var answer in answerUIs)
+            answer.SetActive(false);
 
-        // Re-enable player movement when done
+        // Montre la réponse associée au bouton sélectionné
+        for (int i = 0; i < responseUIs.Length; i++)
+            responseUIs[i].SetActive(i == selectedButtonIndex);
+
         if (playerMovementScript != null)
-        {
-            playerMovementScript.enabled = true; // Enable movement after selection
-        }
+            playerMovementScript.enabled = true;
+
+        machineCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+        interractionlucas.isInInteraction = false;
     }
 }
