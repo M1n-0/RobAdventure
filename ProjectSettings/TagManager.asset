@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - JumpTrigger
+  - Obstacle
+  - WorldInteractible
+  - Platform
+  - CamPos2
+  - CamPos3
+  - door
+  - platform
+  - exit
+  - batterie
+  - LeafZone
   layers:
   - Default
   - TransparentFX

@@ -1,42 +1,31 @@
-//made by NepNath 
-//Creation Date: 27/11/2024
-//last edited: 18/12/2024
 
-// This script is made for a student project called "RobAdventure".
-// These inputs are designed for a specific set of controller handmade,
-// based on a arcade machine (arcade joystick and 4 buttons)
-
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.UI;
-using static interraction;
+
 
 public class PlayerMovementSerre : MonoBehaviour
 {
+
+    [Header ("References")]
+    public bool IsInJump;
+
     [Header("Player Movement details")]
     Vector3 moveDirection;
     public float speed = 10f;
+    float leafSpeed = 4f;
     public float JumpForce = 10;
-    public Rigidbody Rigidbody;
+    Rigidbody Rigidbody;
     public float TurnSpeed;
     public bool hasLeaf;
     [SerializeField] float Gravity;
     [SerializeField] float LeafGravity;
-    [SerializeField] float PlatformForce;
     [SerializeField] LayerMask groundLayer;
+    
+    [SerializeField] GameObject InfoCanva;
     [SerializeField] Vector3 groundRadiusPosition;
     public float groundRadius;
     [Header("Raycast propeties")]
-
-    Ray ray;
-    public float MaxRayDist = 100;
-    public string groundTag = "JumpTrigger";
+    [HideInInspector] public string groundTag = "JumpTrigger";
     
     // Start is called before the first frame update
     void Start()
@@ -55,15 +44,16 @@ public class PlayerMovementSerre : MonoBehaviour
         if(isGrounded())
         {
             Debug.Log("Is Grounded");
+            Rigidbody.linearDamping = 10f;
+
         }
 
-        if(!isGrounded() || hasLeaf)
+        if(!isGrounded())
         {
-            Rigidbody.linearDamping = 2;
-        }
-        else
+            Rigidbody.linearDamping = 2f;
+        }else if(!isGrounded() && hasLeaf)
         {
-            Rigidbody.linearDamping = 5f;
+            Rigidbody.linearDamping = 2f;
         }
         
         addedGravity();
@@ -73,14 +63,24 @@ public class PlayerMovementSerre : MonoBehaviour
         
         moveDirection = new Vector3(-horizontalInput, 0, -verticalInput).normalized;
 
-        if (!lockpos) {
-            if (moveDirection != Vector3.zero)
-            {
-                Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
-            }
+       
+        if (isGrounded())
+        {
+            Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+        }else if (hasLeaf && !isGrounded())
+        {
+            Rigidbody.AddForce(moveDirection * speed * 10f * Time.deltaTime, ForceMode.Force);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+        }else if (!isGrounded())
+        {
+            Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
         }
+        
     }
     
 
@@ -109,19 +109,22 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Rigidbody.AddForce(Vector3.down * Gravity, ForceMode.Force);
         }
-        else if(hasLeaf)
+        else if(hasLeaf && !isGrounded())
         {
             Rigidbody.AddForce(Vector3.down * LeafGravity, ForceMode.Force);
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {   
-        if (collision.gameObject.CompareTag("Platform"))
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("CamPos2"))
         {
-            // Apply bounce effect
-            GetComponent<Rigidbody>().linearVelocity = new Vector3(0,PlatformForce, 0); // Adjust force as needed
+            IsInJump = true;
         }
+        
     }
-
+    void OnTriggerExit(Collider other)
+    {       
+        IsInJump = false;
+    }
 }
