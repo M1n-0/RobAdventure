@@ -7,91 +7,114 @@
 // based on a arcade machine (arcade joystick and 4 buttons)
 
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Movement details")]
+    Vector3 moveDirection;
+    Animator animate;
     public float speed = 10f;
     public float JumpForce = 10;
-    public Rigidbody Rigidbody;
+    Rigidbody Rigidbody;
     public float TurnSpeed;
-
-    private bool isGrounded;
-    private bool isAlive = true;
+    [SerializeField] float Gravity;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Vector3 groundRadiusPosition;
+    public float groundRadius;
     [Header("Raycast propeties")]
+    [HideInInspector] public string groundTag = "JumpTrigger";
 
-    Ray ray;
-    public float MaxRayDist = 100;
-    public string groundTag = "JumpTrigger";
-
+    private bool isAlive = true;
+    
     public ConsoleTrigger interactible;
     public GameObject GameOverMenu;
     
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
+        Rigidbody = GetComponent<Rigidbody>();
+        animate = GetComponent<Animator>();
         Time.timeScale = 1;
         isAlive = true;
     }
-        
 
-    // Update is called once per frame
+
     void Update()
+    {
+        jump();
+    }
+    // Update is called once per frame
+    void FixedUpdate()
     {   
-        //raycast declaration   
-        ray = new Ray(transform.position, Vector3.down);
-        Vector3 rayOrigin = transform.position;
-        Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.blue);
-
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        Vector3 moveDirection = new Vector3(horizontalInput, 0, 0).normalized;
-
         if (!interactible.inInteraction())
         {
-            if (moveDirection != Vector3.zero)
+          if(isGrounded())
             {
-                transform.position += moveDirection * speed * Time.deltaTime;
+                Debug.Log("Is Grounded");
+            }
+
+            if(!isGrounded())
+            {
+                Rigidbody.linearDamping = 1f;
+            }
+            else
+            {
+                Rigidbody.linearDamping = 10f;
+            }
+        
+            addedGravity();
+
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+        
+            moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+
+       
+            if ((isGrounded() && horizontalInput != 0) || (isGrounded() && verticalInput != 0))
+            {
+                Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            }else if ((!isGrounded() && horizontalInput != 0) || (!isGrounded() && verticalInput != 0))
+            {
+                Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }
         }
+        
+        
+    }
+    
 
-        //jump for button
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) && isGrounded == true) // equivalent of 'X'/'A'
+    void jump()
+    {
+        if(Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
-           Rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
-           Debug.Log("Jump key  pressed");
-        }
-        //jump for keyboard
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true) // equivalent of 'X'/'A'
-        {
-           Rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
-           Debug.Log("Jump key  pressed");
-        }
-
-        //raycast
-        if(Physics.Raycast(ray, out RaycastHit hit, MaxRayDist))
-        {
-            if (hit.collider.CompareTag(groundTag))
-            {
-                isGrounded = true;
-                // Debug.Log("Is Grounded By Ray V 〰️");
-                Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.green);
-            }
+            animate.SetBool("isJumping",true);
+            Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
         else
         {
-            isGrounded = false;
-            // Debug.Log("Not Grounded By Ray X 〰️");
-            Debug.DrawLine(rayOrigin,rayOrigin + Vector3.down * MaxRayDist, Color.red);
+            animate.SetBool("isJumping",false);
         }
+    }
+
+    bool isGrounded()
+    {
+        return Physics.CheckSphere(transform.position - groundRadiusPosition, groundRadius, groundLayer);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position - groundRadiusPosition, groundRadius);
+    }
+
+    void addedGravity()
+    {
+        Rigidbody.AddForce(Vector3.down * Gravity, ForceMode.Force);
     }
 
     void OnTriggerEnter(Collider other){
@@ -107,5 +130,4 @@ public class PlayerMovement : MonoBehaviour
     public bool Alive(){
         return isAlive;
     }
-
 }

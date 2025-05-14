@@ -6,9 +6,10 @@ using static KeyTrigger;
 public class ConsoleTrigger : MonoBehaviour
 {
     [Header("Material")]
-    public Material[] materials;
-    Renderer rend;
-    public GameObject cage;
+    //public Material[] materials;
+    //Renderer rend;
+    public GameObject openButton;
+    public GameObject lockButton;
     public GameObject panelEnigme;
     public GameObject question1;
     public GameObject question2;
@@ -20,9 +21,11 @@ public class ConsoleTrigger : MonoBehaviour
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        rend.enabled = true;
-        rend.sharedMaterial = materials[0];
+        openButton.SetActive(false);
+        lockButton.SetActive(true);
+        //rend = GetComponent<Renderer>();
+        //rend.enabled = true;
+        //rend.sharedMaterial = materials[0];
         isInInteraction = false;
         isIn = false;
         numQuestion = Random.Range(0, 3);
@@ -32,7 +35,7 @@ public class ConsoleTrigger : MonoBehaviour
     void Update()
     {
         if(keyCollected){
-            rend.sharedMaterial = materials[1];
+            //rend.sharedMaterial = materials[1];
             detectInterraction();
             panelInterraction();
         }
@@ -90,7 +93,8 @@ public class ConsoleTrigger : MonoBehaviour
         }
     }
     public void goodAnswer(){
-        Destroy(cage);
+        lockButton.SetActive(false);
+        openButton.SetActive(true);
         isInInteraction = false;
         keyCollected = false;
         panelInterraction();

@@ -5,16 +5,14 @@ using UnityEngine;
 public class ButtonTrigger : MonoBehaviour
 {
     [Header("Doors to Open")]
-    public GameObject leftDoor;
-    public GameObject rightDoor;
+    public GameObject door;
 
     public static bool isInInteraction = false;
     private bool isIn = false;
     private bool isOpen = false;
     private bool destroyed = false;
 
-    private Coroutine openLeft;
-    private Coroutine openRight;
+    private Coroutine openDoor;
 
     void Start()
     {
@@ -29,8 +27,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         detect();
         if (isOpen && !destroyed){
-            Destroy(leftDoor);
-            Destroy(rightDoor);
+            Destroy(door);
             destroyed = true;
         }
     }
@@ -53,13 +50,12 @@ public class ButtonTrigger : MonoBehaviour
         if (isIn){
             if (Input.GetKeyDown(KeyCode.E)){
                 Debug.Log("Key E pressed while in triggerbox");
-                openLeft = StartCoroutine(openingDoor(leftDoor, 1));
-                openRight = StartCoroutine(openingDoor(rightDoor, -1));
+                openDoor = StartCoroutine(openingDoor(1));
             }
         }
     }
 
-    IEnumerator openingDoor(GameObject door, int movement){
+    IEnumerator openingDoor(int movement){
         float loop = 2;
         while(loop >= 0){
             door.transform.position += new Vector3(0, 0, movement)* 10 * Time.deltaTime;
