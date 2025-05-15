@@ -11,31 +11,27 @@ public class LaserBlinking : MonoBehaviour
     [Header("Blink Frequences")]
 
     public float blinkTime;
-    public float animSpeed;
+    public float interval;
     private bool state;
-    private float degree;
+    private float timer = 0f;
+    private bool isRotated = false;
     void Start()
     {
         state = true;
-        degree = 0;
-        Quaternion rotate = Quaternion.Euler(0, 0, 0);
-        blinker.transform.rotation = Quaternion.Slerp(transform.rotation, rotate, animSpeed * Time.deltaTime);
-        //StartCoroutine(Blinking());
+        StartCoroutine(Blinking());
     }
 
     void Update()
     {
-        if (degree == 0)
-        {
-            Quaternion rotate = Quaternion.Euler(degree, 0, 0);
-            blinker.transform.rotation = Quaternion.Slerp(transform.rotation, rotate, animSpeed * Time.deltaTime);
-            degree = 180;
-        }
-        else
-        {
-            Quaternion rotate = Quaternion.Euler(degree, 0, 0);
-            blinker.transform.rotation = Quaternion.Slerp(transform.rotation, rotate, animSpeed * Time.deltaTime);
-            degree = 0;
+        if (state){
+            timer += Time.deltaTime;
+            if (timer >= interval)
+            {
+                float xRotation = isRotated ? 0f : 180f;
+                blinker.transform.rotation = Quaternion.Euler(xRotation, blinker.transform.rotation.eulerAngles.y, blinker.transform.rotation.eulerAngles.z);
+                isRotated = !isRotated;
+                timer = 0f;
+            }
         }
     }
 
