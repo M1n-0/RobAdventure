@@ -74,14 +74,20 @@ public class PlayerMovement : MonoBehaviour
        
             if ((isGrounded() && horizontalInput != 0) || (isGrounded() && verticalInput != 0))
             {
+                animate.SetBool("isRunning",true);
                 Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }else if ((!isGrounded() && horizontalInput != 0) || (!isGrounded() && verticalInput != 0))
             {
+                animate.SetBool("isRunning",false);
                 Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            }
+            else
+            {
+                animate.SetBool("isRunning",false);
             }
         }
         
