@@ -680,8 +680,24 @@ PrefabInstance:
       value: Spotlight (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Range
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 22.487732
+      value: 33.668015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 1.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -798,8 +814,20 @@ PrefabInstance:
       value: Spotlight (4)
       objectReference: {fileID: 0}
     - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Range
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 22.487732
+      value: 33.668015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 1.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2940,8 +2968,20 @@ PrefabInstance:
       value: Spotlight (5)
       objectReference: {fileID: 0}
     - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Range
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 22.487732
+      value: 33.668015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 1.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3668,8 +3708,20 @@ PrefabInstance:
       value: Spotlight (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Range
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 22.487732
+      value: 33.668015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 1.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3839,8 +3891,20 @@ PrefabInstance:
       value: Spotlight (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Range
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 22.487732
+      value: 33.668015
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002282750308438966, guid: 2a10ab8211df8e942875739b3bb11696, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 1.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5688,7 +5752,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.93639904, b: 0.7075472, a: 1}
-  m_Intensity: 2
+  m_Intensity: 2.01
   m_Range: 2.08
   m_SpotAngle: 85.57991
   m_InnerSpotAngle: 56.50717
@@ -10317,7 +10381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3196117471696352452, guid: 089e7063715c78846b7396b58fe2bbcd, type: 3}
       propertyPath: m_Intensity
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3916882131215577758, guid: 089e7063715c78846b7396b58fe2bbcd, type: 3}
       propertyPath: m_LocalPosition.x
