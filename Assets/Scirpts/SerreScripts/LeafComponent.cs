@@ -18,7 +18,7 @@ public class LeafComponent : MonoBehaviour
 
     void Update()
     {
-        if(inLeafZone && Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+        if(inLeafZone && Input.GetKeyDown(KeyCode.E) || inLeafZone && Input.GetKeyDown(KeyCode.Joystick1Button2))
         {
             Debug.Log("Leaf Collected");
             LeafGameObject.SetActive(false);

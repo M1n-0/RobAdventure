@@ -1,7 +1,6 @@
-using UnityEditor.Callbacks;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+
 
 public class JetPackMovement : MonoBehaviour
 {
@@ -22,8 +21,6 @@ public class JetPackMovement : MonoBehaviour
     void Start(){
         Time.timeScale = 1;
         Rigidbody = GetComponent<Rigidbody>();
-
-
     }
     void Update()
     {
