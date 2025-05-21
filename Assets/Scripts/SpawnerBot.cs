@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerBot : MonoBehaviour
@@ -11,31 +9,26 @@ public class SpawnerBot : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnObjects());
+
     }
-    IEnumerator SpawnObjects()
+    public void SpawnBotObstacle()
     {
-        while (true)
-        {
-            int num = Random.Range(0, 4);
-            if (num == 0){
-                GameObject obs = Instantiate(obstacle1);
-                obs.transform.position = new Vector3(25, 4, -1);
-            }
-            if (num == 1){
-                GameObject obs = Instantiate(obstacle2);
-                obs.transform.position = new Vector3(17, 4, -1);
-            }
-            if (num == 2){
-                GameObject obs = Instantiate(obstacle3);
-                obs.transform.position = new Vector3(14, 4, -1);
-            }
-            if (num == 3){
-                GameObject obs = Instantiate(obstacle4);
-                obs.transform.position = new Vector3(3, 4, -1);
-            }
-            yield return new WaitForSeconds(Random.Range(0.75f, 1.75f));
+        int num = Random.Range(0, 4);
+        if (num == 0){
+            GameObject obs = Instantiate(obstacle1);
+            obs.transform.position = new Vector3(3.5f, 4, -3);
         }
-        
+        if (num == 1){
+            GameObject obs = Instantiate(obstacle2);
+            obs.transform.position = new Vector3(12, 4, -3);
+        }
+        if (num == 2){
+            GameObject obs = Instantiate(obstacle3);
+            obs.transform.position = new Vector3(15, 4, -3);
+        }
+        if (num == 3){
+            GameObject obs = Instantiate(obstacle4);
+            obs.transform.position = new Vector3(26, 4, -3);
+        }
     }
 }
