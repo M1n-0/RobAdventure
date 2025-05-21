@@ -24,27 +24,43 @@ public class PlayerMovementSerre : MonoBehaviour
     public float groundRadius;
     [Header("Raycast propeties")]
     [HideInInspector] public string groundTag = "JumpTrigger";
-    
+
+    [SerializeField] private rope rope;
+
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        if (rope == null)
+        {
+            rope = UnityEngine.Object.FindAnyObjectByType<rope>();
+        }
     }
-
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("exit"))
+        {
+            Debug.Log("Exited Trigger2");
+            rope.isIn = false;
+            Rigidbody.useGravity = true;
+            rope.isInInteraction = false;
+            Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+            transform.position = rope.EndPosition.position;
+        }
+    }
     void Update()
     {
         jump();
     }
     // Update is called once per frame
     void FixedUpdate()
-    {   
-        if(isGrounded())
+    {
+        if (isGrounded())
         {
             Debug.Log("Is Grounded");
         }
 
-        if(!isGrounded() || hasLeaf)
+        if (!isGrounded() || hasLeaf)
         {
             Rigidbody.linearDamping = 3.5f;
         }
@@ -52,35 +68,36 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Rigidbody.linearDamping = 10f;
         }
-        
+
         addedGravity();
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        
+
         moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-       
+
         if (isGrounded())
         {
             Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
-        }else if (!isGrounded())
+        }
+        else if (!isGrounded())
         {
             Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
         }
-        
+
     }
-    
+
 
     void jump()
     {
-        if(Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
-            
+
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
     }
@@ -97,11 +114,11 @@ public class PlayerMovementSerre : MonoBehaviour
 
     void addedGravity()
     {
-        if(!hasLeaf)
+        if (!hasLeaf)
         {
             Rigidbody.AddForce(Vector3.down * Gravity, ForceMode.Force);
         }
-        else if(hasLeaf)
+        else if (hasLeaf)
         {
             Rigidbody.AddForce(Vector3.down * LeafGravity, ForceMode.Force);
         }

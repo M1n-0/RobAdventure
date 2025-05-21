@@ -5,36 +5,31 @@ using UnityEngine.UIElements;
 
 public class rope : MonoBehaviour
 {
-    [SerializeField] Transform StartPosition;
-    [SerializeField] Transform EndPosition;
+    public Transform StartPosition;
+    public Transform EndPosition;
+    public Transform PlayerPosition;
+    public GameObject Player;
     private float speed = 1f;
     public static bool isInInteraction = false;
-    private bool isIn = false;
+    public bool isIn = false;
 
     Rigidbody rb; 
     void Start(){
         isInInteraction = false;
         isIn = false;
-        rb = GetComponent<Rigidbody>();
+        rb = Player.GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other){
         Debug.Log("Entered trigger");
-        if (other.CompareTag("Rope")){
+        if (other.CompareTag("Player")){
             isIn = true;
         }
-        if (other.CompareTag("exit")){
-            Debug.Log("Exited Trigger2"); 
-            isIn = false;
-            rb.useGravity = true;
-            isInInteraction = false;
-            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
-            transform.position = EndPosition.position;
-        }
+        
     }
     private void OnTriggerExit(Collider other){
         Debug.Log("Exited Trigger"); 
-        if (other.CompareTag("Rope")){
+        if (other.CompareTag("Player")){
             isIn = false;
             isInInteraction = false;
             rb.useGravity = true;
@@ -48,12 +43,12 @@ public class rope : MonoBehaviour
                 Debug.Log("Key E pressed while in triggerbox");
                 isInInteraction = true;
                 rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
-                transform.position = StartPosition.position;
+                PlayerPosition.position = StartPosition.position;
             }
             if (isInInteraction){
                 
                 rb.useGravity = false;
-                Vector3 rayOrigin = transform.position;
+                Vector3 rayOrigin = PlayerPosition.position;
                 Debug.Log("Go Up function called");
 
                 float verticalInput = Input.GetAxisRaw("Vertical");
