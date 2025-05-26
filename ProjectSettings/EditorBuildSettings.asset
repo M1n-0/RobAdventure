@@ -18,14 +18,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TestSceneLightWeight.unity
     guid: c00f9ef35f4ca954c9684bd2f059975d
   - enabled: 1
+    path: Assets/Scenes/JetPack/JetpackScene1.unity
+    guid: 5a0f33aa1d9084a4c8996faec78d2b26
+  - enabled: 1
+    path: Assets/Scenes/JetPack/JetpackScene2.unity
+    guid: 11f1dbce51949fe4999e7cd78f4cd6ad
+  - enabled: 1
     path: Assets/Scenes/Serre-Assets.unity
     guid: 3f8c4673cec064e4aabb75036c912d28
-  - enabled: 1
-    path: Assets/Scenes/JetpackScene1.unity
-    guid: 69d0ff40574cdd34ba971f449b49e292
-  - enabled: 1
-    path: Assets/Scenes/JetpackScene2.unity
-    guid: 81e1182ce17e5df4b843a875ada217d3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
