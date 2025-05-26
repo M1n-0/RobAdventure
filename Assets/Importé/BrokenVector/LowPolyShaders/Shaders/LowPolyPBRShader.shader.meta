@@ -12,5 +12,5 @@ AssetOrigin:
   productId: 101732
   packageName: Low Poly Storage Pack
   packageVersion: 1.1
-  assetPath: Assets/BrokenVector/LowPolyShaders/Shaders/LowPolyPBRShader.shader
+  assetPath: "Assets/Import\xE9/BrokenVector/LowPolyShaders/Shaders/LowPolyPBRShader.shader"
   uploadId: 253919

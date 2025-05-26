@@ -12,6 +12,7 @@ public class PlayerMovementSerre : MonoBehaviour
     [Header("Player Movement details")]
     Vector3 moveDirection;
     public float speed = 10f;
+    [SerializeField] float GroundDrag;
     float leafSpeed = 4f;
     public float JumpForce = 10;
     Rigidbody Rigidbody;
@@ -44,8 +45,7 @@ public class PlayerMovementSerre : MonoBehaviour
         if(isGrounded())
         {
             Debug.Log("Is Grounded");
-            Rigidbody.linearDamping = 10f;
-
+            Rigidbody.linearDamping = GroundDrag;
         }
 
         if(!isGrounded())
