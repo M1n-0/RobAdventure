@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TimerP2Duration : MonoBehaviour
 {
+    [SerializeField] private float TimeToWin;
     public static bool ending = false;
     private bool win = false;
     public GameObject winMenu;
@@ -20,7 +21,7 @@ public class TimerP2Duration : MonoBehaviour
         }
     }
     IEnumerator WaitForWin(){
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(TimeToWin);
         ending = true;
         yield return new WaitForSeconds(2);
         win = true;

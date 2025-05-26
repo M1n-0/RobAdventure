@@ -1090,6 +1090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff481d8de048b2469fdd3e609ccaf61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeToWin: 2
   winMenu: {fileID: 1407642248}
 --- !u!114 &1148633002
 MonoBehaviour:
