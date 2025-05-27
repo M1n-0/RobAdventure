@@ -618,10 +618,10 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 13
-  m_Range: 10
-  m_SpotAngle: 80.33561
-  m_InnerSpotAngle: 69.18139
+  m_Intensity: 20
+  m_Range: 12.5
+  m_SpotAngle: 127.50453
+  m_InnerSpotAngle: 58.29625
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
