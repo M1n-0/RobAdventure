@@ -16,11 +16,11 @@ public class Animations : MonoBehaviour
     {   
         if (Input.GetKey(KeyCode.Space))
         {
-            animate.SetBool("isJumping",true);
+            animate.SetBool("Jumping",true);
         }
         else
         {
-            animate.SetBool("isJumping",false);
+            animate.SetBool("Jumping",false);
         }
     }
 
