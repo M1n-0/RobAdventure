@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
             if(!isGrounded())
             {
-                Rigidbody.linearDamping = 1f;
+                Rigidbody.linearDamping = 3.5f;
             }
             else
             {

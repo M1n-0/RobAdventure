@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
+    [SerializeField] GameObject Light;
+    [SerializeField] Transform lightspawnpoint;
     public SpawnerTop top;
     public SpawnerMid mid;
     public SpawnerBot bot;
     void Start()
     {
         StartCoroutine(SpawnObjects());
+        StartCoroutine(SpawnLight());
     }
     IEnumerator SpawnObjects()
     {
@@ -29,6 +32,16 @@ public class SpawnerManager : MonoBehaviour
                 bot.SpawnBotObstacle();
             }
             yield return new WaitForSeconds(Random.Range(0.75f, 1.75f));
+        }
+    }
+
+    IEnumerator SpawnLight()
+    {
+        while (true)
+        {
+            Instantiate(Light, lightspawnpoint.position, lightspawnpoint.rotation);
+            Debug.Log("Spawning Light");
+            yield return new WaitForSeconds(3f);
         }
     }
 }

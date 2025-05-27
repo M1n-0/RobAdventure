@@ -11537,11 +11537,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4989fe198975844981980f7e45ac357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  JumpForce: 5
-  jetpackForce: 4
+  speed: 25
+  JumpForce: 0
+  jetpackForce: 6.5
   TurnSpeed: 10
-  Gravity: 1
+  Gravity: 2.38
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -11557,7 +11557,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148087994420}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8375f403d339e474e90dbb46ffd8765d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -15925,7 +15925,7 @@ GameObject:
   - component: {fileID: 1654551299574519784}
   - component: {fileID: 6770704584388701336}
   - component: {fileID: 6770704584388701335}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: etage3
   m_TagString: JumpTrigger
   m_Icon: {fileID: 0}
@@ -20507,7 +20507,7 @@ GameObject:
   - component: {fileID: 5999925240515911703}
   - component: {fileID: 8442343680706556791}
   - component: {fileID: 8442343680706556790}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: sol
   m_TagString: JumpTrigger
   m_Icon: {fileID: 0}
@@ -23868,7 +23868,7 @@ GameObject:
   - component: {fileID: 29090102897787534}
   - component: {fileID: 8578134296488315810}
   - component: {fileID: 8578134296488315809}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: etage2
   m_TagString: JumpTrigger
   m_Icon: {fileID: 0}
