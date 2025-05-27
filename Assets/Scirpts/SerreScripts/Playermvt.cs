@@ -23,6 +23,8 @@ public class PlayerMovementSerre : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     
     [SerializeField] GameObject InfoCanva;
+    [SerializeField] GameObject endCanva;
+
     [SerializeField] Vector3 groundRadiusPosition;
     public float groundRadius;
     [Header("Raycast propeties")]
@@ -126,9 +128,14 @@ public class PlayerMovementSerre : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("CamPos2"))
+        if (other.CompareTag("CamPos2"))
         {
             IsInJump = true;
+        }
+        if (other.CompareTag("End"))
+        {
+            Time.timeScale = 0f;
+            endCanva.SetActive(true);
         }
         
     }

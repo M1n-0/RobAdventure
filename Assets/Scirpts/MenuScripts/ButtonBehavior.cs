@@ -17,6 +17,6 @@ public class ButtonBehavior : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Serre-Assets");
+        SceneManager.LoadScene("JetpackScene1");
     }
 }
