@@ -75,20 +75,20 @@ public class PlayerMovement : MonoBehaviour
        
             if ((isGrounded() && horizontalInput != 0) || (isGrounded() && verticalInput != 0))
             {
-                animate.SetBool("isRunning",true);
+                animate.SetBool("Running",true);
                 Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }else if ((!isGrounded() && horizontalInput != 0) || (!isGrounded() && verticalInput != 0))
             {
-                animate.SetBool("isRunning",false);
+                animate.SetBool("Running",true);
                 Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }
             else
             {
-                animate.SetBool("isRunning",false);
+                animate.SetBool("Running",false);
             }
         }
         
@@ -100,17 +100,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
-            animate.SetBool("isJumping", true);
+            animate.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
         else if ((Input.GetKey(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Space)) && !isGrounded())
         {
             Debug.Log("Using Jetpack");
+            animate.SetBool("Jetpacking", true);
             Rigidbody.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
         }
         else
         {
-            animate.SetBool("isJumping", false);
+            animate.SetBool("Jumping", false);
+            animate.SetBool("Jetpacking", false);
         }
         
     }
