@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Using Jetpack");
             animate.SetBool("Jetpacking", true);
-            Rigidbody.AddForce(Vector3.up * jetpackForce, ForceMode.Force);
+            Rigidbody.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
         }
         else
         {

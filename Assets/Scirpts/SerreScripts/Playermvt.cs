@@ -27,8 +27,11 @@ public class PlayerMovementSerre : MonoBehaviour
 
     [SerializeField] Vector3 groundRadiusPosition;
     public float groundRadius;
+    
     [Header("Raycast propeties")]
     [HideInInspector] public string groundTag = "JumpTrigger";
+    [Header("Animator script")]
+    public Animator animation;
     
     // Start is called before the first frame update
     void Start()
@@ -43,64 +46,83 @@ public class PlayerMovementSerre : MonoBehaviour
     }
     // Update is called once per frame
     void FixedUpdate()
-    {   
-        if(isGrounded())
+    {
+        if (isGrounded())
         {
             Debug.Log("Is Grounded");
             Rigidbody.linearDamping = GroundDrag;
         }
 
-        if(!isGrounded())
-        {
-            Rigidbody.linearDamping = 2f;
-        }else if(!isGrounded() && hasLeaf)
+        if (!isGrounded())
         {
             Rigidbody.linearDamping = 2f;
         }
-        
+        else if (!isGrounded() && hasLeaf)
+        {
+            Rigidbody.linearDamping = 2f;
+        }
+
         addedGravity();
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        
+
         moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
-       
+
         if (isGrounded())
         {
             Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
+            animation.SetBool("Falling",false);
             if (horizontalInput != 0 || verticalInput != 0)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);    
+                animation.SetBool("Running", true);
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }
-        }else if (hasLeaf && !isGrounded())
+            else
+            {
+                animation.SetBool("Running", false);
+            }
+        }
+        else if (hasLeaf && !isGrounded())
         {
             Rigidbody.AddForce(moveDirection * speed * 10f * Time.deltaTime, ForceMode.Force);
+            animation.SetBool("Falling", true);
             if (horizontalInput != 0 || verticalInput != 0)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);    
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
-            }
-        }else if (!isGrounded())
-        {
-            Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
-            if (horizontalInput != 0 || verticalInput != 0)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);    
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
             }
         }
+        else if (!isGrounded())
+        {
+            Rigidbody.AddForce(moveDirection * speed * 25f * Time.deltaTime, ForceMode.Force);
+            animation.SetBool("Running", false);
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, TurnSpeed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            animation.SetBool("Falling",false);
+        }
         
     }
-    
+
 
     void jump()
     {
-        if(Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        if((Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space)) && isGrounded())
         {
-            
+            animation.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+        }
+        else
+        {
+            animation.SetBool("Jumping",false);
         }
     }
 
