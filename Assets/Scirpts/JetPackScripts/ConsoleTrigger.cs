@@ -15,6 +15,8 @@ public class ConsoleTrigger : MonoBehaviour
     public GameObject question2;
     public GameObject question3;
 
+    public static bool isNotDumb = false;
+
     public static bool isInInteraction;
     private bool isIn;
     private int numQuestion;
@@ -60,7 +62,7 @@ public class ConsoleTrigger : MonoBehaviour
 
     private void detectInterraction(){
         if (isIn){
-            if (Input.GetKeyDown(KeyCode.E)){
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1)){
                 Debug.Log("Key E pressed while in triggerbox");
                 if (isInInteraction){
                     isInInteraction = false;
@@ -97,6 +99,7 @@ public class ConsoleTrigger : MonoBehaviour
         openButton.SetActive(true);
         isInInteraction = false;
         keyCollected = false;
+        isNotDumb = true;
         panelInterraction();
     }
     public void wrongAnswer(){

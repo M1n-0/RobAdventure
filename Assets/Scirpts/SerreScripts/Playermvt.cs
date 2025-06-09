@@ -27,6 +27,7 @@ public class PlayerMovementSerre : MonoBehaviour
 
     [SerializeField] Vector3 groundRadiusPosition;
     public float groundRadius;
+    
     [Header("Raycast propeties")]
     [HideInInspector] public string groundTag = "JumpTrigger";
     [Header("Animator script & items")]
@@ -119,7 +120,7 @@ public class PlayerMovementSerre : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        if((Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space)) && isGrounded())
         {
             animation.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);

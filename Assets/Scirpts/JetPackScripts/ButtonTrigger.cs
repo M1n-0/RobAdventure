@@ -6,10 +6,11 @@ public class ButtonTrigger : MonoBehaviour
 {
     [Header("Doors to Open")]
     public GameObject door;
+    [SerializeField] GameObject triggerZone;
 
     public static bool isInInteraction = false;
     private bool isIn = false;
-    private bool isOpen = false;
+    public static bool isOpen = false;
     private bool destroyed = false;
 
     private Coroutine openDoor;
@@ -48,9 +49,11 @@ public class ButtonTrigger : MonoBehaviour
   
     private void detect(){
         if (isIn){
-            if (Input.GetKeyDown(KeyCode.E)){
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
                 Debug.Log("Key E pressed while in triggerbox");
                 openDoor = StartCoroutine(openingDoor(1));
+                Destroy(triggerZone);
             }
         }
     }
