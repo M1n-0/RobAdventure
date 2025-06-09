@@ -29,13 +29,15 @@ public class PlayerMovementSerre : MonoBehaviour
     public float groundRadius;
     [Header("Raycast propeties")]
     [HideInInspector] public string groundTag = "JumpTrigger";
-    [Header("Animator script")]
+    [Header("Animator script & items")]
     public Animator animation;
-    
+    public GameObject leaf;
+
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        leaf.SetActive(false);
     }
 
 
@@ -50,6 +52,7 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Debug.Log("Is Grounded");
             Rigidbody.linearDamping = GroundDrag;
+            animation.SetBool("Jumping",false);
         }
 
         if (!isGrounded())
@@ -73,6 +76,7 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Rigidbody.AddForce(moveDirection * speed * 100f * Time.deltaTime, ForceMode.Force);
             animation.SetBool("Falling",false);
+            leaf.SetActive(false);
             if (horizontalInput != 0 || verticalInput != 0)
             {
                 animation.SetBool("Running", true);
@@ -88,6 +92,7 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             Rigidbody.AddForce(moveDirection * speed * 10f * Time.deltaTime, ForceMode.Force);
             animation.SetBool("Falling", true);
+            leaf.SetActive(true);
             if (horizontalInput != 0 || verticalInput != 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
@@ -118,10 +123,6 @@ public class PlayerMovementSerre : MonoBehaviour
         {
             animation.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-        }
-        else
-        {
-            animation.SetBool("Jumping",false);
         }
     }
 
