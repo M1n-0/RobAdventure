@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4c9e784c1661b5419222934b414942d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64240
+  packageName: Metal Plates
+  packageVersion: 1.0
+  assetPath: Assets/Models/Metal_Plates/Materials/Metal_Plate_3.mat
+  uploadId: 264155

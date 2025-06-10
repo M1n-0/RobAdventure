@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 91d0f8059efded145a5cbf26801a3dab
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64240
+  packageName: Metal Plates
+  packageVersion: 1.0
+  assetPath: Assets/Models/Metal_Plates/Prefabs/Metal_Plate_4.prefab
+  uploadId: 264155
