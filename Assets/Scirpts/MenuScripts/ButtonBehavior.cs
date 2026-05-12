@@ -1,8 +1,17 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ButtonBehavior : MonoBehaviour
 {
+    public Button selectedOnAwakeButton;
+
+    private void Awake()
+    {
+        selectedOnAwakeButton.Select();
+    }
+
     public void LaunchRob(){
         SceneManager.LoadScene("MainMenu");
     }

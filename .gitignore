@@ -51,3 +51,9 @@ crashlytics-build.properties
 
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/.idea/.gitignore
+/.idea/discord.xml
+/.idea/encodings.xml
+/.idea/indexLayout.xml
+/Assets/Images/log.png.meta
+/.idea/vcs.xml
