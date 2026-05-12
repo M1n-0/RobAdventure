@@ -98,12 +98,12 @@ public class PlayerMovement : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetKeyDown(KeyCode.JoystickButton3) || KeyCode.Joystick2Button3) || Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        if (Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode) && isGrounded())
         {
             animate.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
-        else if ((Input.GetKey(KeyCode.JoystickButton3) || KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Space)) && !isGrounded())
+        else if ((Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode)) && !isGrounded())
         {
             Debug.Log("Using Jetpack");
             animate.SetBool("Jetpacking", true);

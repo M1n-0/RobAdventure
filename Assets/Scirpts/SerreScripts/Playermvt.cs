@@ -120,7 +120,7 @@ public class PlayerMovementSerre : MonoBehaviour
 
     void jump()
     {
-        if((Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Space)) && isGrounded())
+        if((Input.GetKeyDown(KeyCode.JoystickButton3) || Input.GetKeyDown(KeyCode.Space)) && isGrounded())
         {
             animation.SetBool("Jumping", true);
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
